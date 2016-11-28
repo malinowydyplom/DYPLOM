@@ -67,7 +67,7 @@ while True:
         #to dodajemy do naszej maski
         # if the number of pixels in the component is sufficiently
 	# large, then add it to our mask of "large blobs"
-        if numPixels>400:
+        if numPixels>100:
             mask=cv2.add(mask, labelMask)
 
     #znajdź kontury w masce a następnie posortuj je od lewej do prawej
