@@ -83,7 +83,6 @@ while True:
     #inucjujemy listy do przechowywania współrzędnych środków konturów
     #initiate lists for gathering coordinates of contours centroids
     list_rectangle=[]
-    #list_triangle=[]
     list_circle=[]
 
     #tworzymy pętlę poprzez kontury
@@ -110,11 +109,7 @@ while True:
             list_rectangle.append(cY)        
             cv2.putText(frame, "Marker nr 1",(cX, cY-20),
             cv2.FONT_HERSHEY_PLAIN, 0.45, (0, 0, 255), 1)
-        #elif shape=="triangle":
-        #    list_triangle.append(cX)
-         #   list_triangle.append(cY)
-          #  cv2.putText(frame, "Marker nr 2",(cX, cY-20),
-           # cv2.FONT_HERSHEY_PLAIN, 0.45, (0, 0, 255), 1)
+
         elif shape=="circle":
             list_circle.append(cX)
             list_circle.append(cY)        
@@ -137,7 +132,7 @@ while True:
             d12 = sqrt((rec_px-c1_px)**2+(rec_py-c1_py)**2)
             d23 = sqrt((rec_px-c2_px)**2+(rec_py-c2_py)**2)
             d13 = sqrt((c2_px-c1_px)**2+(c2_py-c1_py)**2)
-            rad = acos(-((d13**2-d12**2-d23**2)/(2*d12*d23*pi)))
+            rad = acos((d12**2+d23**2-d13**2)/(2*d12*d23)*(180/pi))
             cv2.putText(frame, "Kat: "+str(rad), (10,20), cv2.FONT_HERSHEY_PLAIN, 0.8, (0, 0, 255), 1)
             pass  
             
