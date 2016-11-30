@@ -11,6 +11,7 @@ import cv2
 from math import atan, pi
 
 
+
 #tworzymy wątek streamu wideo, pozwalamy kamerze na rozgrzanie się
 #zaczynamy odliczanie FPS
 #create video stream, allow camera to warmup and start counting FPS
@@ -67,7 +68,7 @@ while True:
         #to dodajemy do naszej maski
         # if the number of pixels in the component is sufficiently
 	# large, then add it to our mask of "large blobs"
-        if numPixels>100:
+        if numPixels>400:
             mask=cv2.add(mask, labelMask)
 
     #znajdź kontury w masce a następnie posortuj je od lewej do prawej

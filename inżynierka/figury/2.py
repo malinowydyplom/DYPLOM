@@ -83,7 +83,7 @@ while True:
     #inucjujemy listy do przechowywania współrzędnych środków konturów
     #initiate lists for gathering coordinates of contours centroids
     list_rectangle=[]
-    list_triangle=[]
+    #list_triangle=[]
     list_circle=[]
 
     #tworzymy pętlę poprzez kontury
@@ -110,23 +110,23 @@ while True:
             list_rectangle.append(cY)        
             cv2.putText(frame, "Marker nr 1",(cX, cY-20),
             cv2.FONT_HERSHEY_PLAIN, 0.45, (0, 0, 255), 1)
-        elif shape=="triangle":
-            list_triangle.append(cX)
-            list_triangle.append(cY)
-            cv2.putText(frame, "Marker nr 2",(cX, cY-20),
-            cv2.FONT_HERSHEY_PLAIN, 0.45, (0, 0, 255), 1)
+        #elif shape=="triangle":
+        #    list_triangle.append(cX)
+         #   list_triangle.append(cY)
+          #  cv2.putText(frame, "Marker nr 2",(cX, cY-20),
+           # cv2.FONT_HERSHEY_PLAIN, 0.45, (0, 0, 255), 1)
         elif shape=="circle":
             list_circle.append(cX)
             list_circle.append(cY)        
             cv2.putText(frame, "Marker nr 3",(cX, cY-20),
             cv2.FONT_HERSHEY_PLAIN, 0.45, (0, 0, 255), 1)
 
-        if len(list_triangle)==2 and len(list_circle)==2 and len(list_rectangle)==2:
-            cv2.line(frame,(int(list_triangle[0]),int(list_triangle[1])),
+        if len(list_circle)==4 and len(list_rectangle)==2:
+            cv2.line(frame,(int(list_rectangle[0]),int(list_rectangle[1])),
                      (int(list_circle[0]),int(list_circle[1])), (0,0,255), 1, 8, 0)
 
-            cv2.line(frame,(int(list_triangle[0]),int(list_triangle[1])),
-                     (int(list_rectangle[0]),int(list_rectangle[1])), (0,0,255), 1, 8, 0)
+            cv2.line(frame,(int(list_rectangle[0]),int(list_rectangle[1])),
+                     (int(list_circle[2]),int(list_circle[3])), (0,0,255), 1, 8, 0)
             
 
     cv2.imshow('Image', frame)
