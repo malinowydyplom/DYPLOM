@@ -1,4 +1,5 @@
 #importujemy potrzebne biblioteki
+#import necesarry libs
 from __future__ import print_function
 from imutils.video.pivideostream import PiVideoStream
 from imutils.video import FPS
@@ -8,7 +9,7 @@ import numpy as np
 import imutils
 import time
 import cv2
-from math import acos, pi
+from math import acos, pi, sqrt
 from pyimagesearch.shapedetector import ShapeDetector
 
 
@@ -70,16 +71,10 @@ while True:
 	# large, then add it to our mask of "large blobs"
         if numPixels>400:
             mask=cv2.add(mask, labelMask)
-
-    #znajdź kontury w masce a następnie posortuj je od lewej do prawej
-    #find the contours in the mask and then sort them
-    cnts=cv2.findContours(mask.copy(), cv2.RETR_EXTERNAL,
-        cv2.CHAIN_APPROX_SIMPLE)
     
     cnts=cnts[0] if imutils.is_cv2() else cnts[1]
     sd=ShapeDetector()
-    
-
+ 
     #inucjujemy listy do przechowywania współrzędnych środków konturów
     #initiate lists for gathering coordinates of contours centroids
     list_rectangle=[]
@@ -98,7 +93,8 @@ while True:
         cY=int((M['m01']/(M['m00'])))
         shape=sd.detect(c)
 
-        #rysujemy kontury z nazwą kształtu
+        #rysujemy kontury
+	#drawing contours
         c=c.astype('float')        
         c=c.astype('int')
         cv2.drawContours(frame, [c], -1, (0, 255, 0), 2)
@@ -107,15 +103,12 @@ while True:
         if shape=="rectangle":
             list_rectangle.append(cX)
             list_rectangle.append(cY)        
-            cv2.putText(frame, "Marker nr 1",(cX, cY-20),
-            cv2.FONT_HERSHEY_PLAIN, 0.45, (0, 0, 255), 1)
-
+           
         elif shape=="circle":
             list_circle.append(cX)
             list_circle.append(cY)        
-            cv2.putText(frame, "Marker nr 3",(cX, cY-20),
-            cv2.FONT_HERSHEY_PLAIN, 0.45, (0, 0, 255), 1)
-
+	#nadanie nazw wspolrzednym srodkow i polaczenie ich
+	#give names of points co-ordinates and conect them
         if len(list_circle)==4 and len(list_rectangle)==2:
             c1_px=list_circle[0]
             c1_py=list_circle[1]
@@ -129,6 +122,7 @@ while True:
             cv2.line(frame,(int(rec_px),int(rec_py)),
                      (int(c2_px),int(c2_py)), (0,0,255), 1, 8, 0)
             #liczymy odległości między punktami i kąt między ramionami
+	    #count length and angle between arms
             d12 = sqrt((rec_px-c1_px)**2+(rec_py-c1_py)**2)
             d23 = sqrt((rec_px-c2_px)**2+(rec_py-c2_py)**2)
             d13 = sqrt((c2_px-c1_px)**2+(c2_py-c1_py)**2)
