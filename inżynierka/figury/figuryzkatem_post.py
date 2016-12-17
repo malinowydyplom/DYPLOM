@@ -39,7 +39,7 @@ while True:
 
     #operacja progowa na obrazie w celu odkrycia jasnych regionów
     #treshold the image to reveal light regions in image
-    thresh=cv2.threshold(blurred, 200, 255, cv2.THRESH_BINARY)[1]
+    thresh=cv2.threshold(blurred, 160, 255, cv2.THRESH_BINARY)[1]
 
     #przeprowadzamy serię erozji i dylatacji w celu usunięcia małych szumów
     #perform series of erosions and dilatations to remove small noises
@@ -132,6 +132,7 @@ while True:
             d23 = sqrt((rec_px-c2_px)**2+(rec_py-c2_py)**2)
             d13 = sqrt((c2_px-c1_px)**2+(c2_py-c1_py)**2)
             rad = acos(((d12**2) + (d23**2) - (d13**2))/(2*d12*d23))*(180/pi)
+            rad=round(rad, 2)
             cv2.putText(frame, "Kat: "+str(rad), (10,20), cv2.FONT_HERSHEY_PLAIN, 0.8, (0, 0, 255), 1)
             pass  
             
