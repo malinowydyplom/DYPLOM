@@ -91,7 +91,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
          
         #wyświetlamy klatkę
         
-        cv2.imshow("Frame", image)
+        cv2.imshow("Frame", thresh)
         key = cv2.waitKey(1) & 0xFF
  
         #czyścimy stream w przygotowaniu na następną klatkę

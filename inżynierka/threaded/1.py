@@ -17,7 +17,7 @@ from math import atan, pi
 #create video stream, allow camera to warmup and start counting FPS
 
 print('[INFORMACJA] pobieranie klatek z modułu ''picamera''...')
-vs=PiVideoStream(resolution=(320, 240)).start()
+vs=PiVideoStream(resolution=(640, 480)).start()
 time.sleep(2.0)
 fps=FPS().start()
 
@@ -135,7 +135,7 @@ while True:
     #wyświetlamy klatkę
     #show interpolated frame
     res=cv2.resize(frame, None, fx=2, fy=2, interpolation=cv2.INTER_LINEAR)        
-    cv2.imshow("Frame", res)
+    cv2.imshow("Frame", thresh)
     key=cv2.waitKey(1) & 0xFF
     if key==ord('q'):
         break
