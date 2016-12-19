@@ -117,9 +117,12 @@ while True:
             d23 = sqrt((rec_px-c2_px)**2+(rec_py-c2_py)**2)
             d13 = sqrt((c2_px-c1_px)**2+(c2_py-c1_py)**2)
             rad = acos(((d12**2) + (d23**2) - (d13**2))/(2*d12*d23))*(180/pi)
+<<<<<<< HEAD
 
             #round value of given rad up to second decimal digit
             #then show value on the upper left corner of the output image
+=======
+>>>>>>> ec4e3d0ae138c5c2a1bbf8aa9ccb613d8a892c8f
             rad=round(rad, 2)
             cv2.putText(frame, "Kat: "+str(rad), (10,20), cv2.FONT_HERSHEY_PLAIN, 0.8, (0, 0, 255), 1)
             pass  
