@@ -11,7 +11,7 @@ name=str(name)
 
 
 camera.start_preview()
-camera.start_recording("/home/pi/"+name+".h264")
+camera.start_recording("/home/pi/Desktop/"+name+".h264")
 sleep(15)
 camera.stop_recording()
 camera.stop_preview()
